@@ -1,0 +1,326 @@
+\documentclass[a4j,dvipdfm]{jsreport}
+\setcounter{secnumdepth}{4}
+\usepackage[top=20truemm,bottom=30truemm,left=20truemm,right=20truemm]{geometry}
+\usepackage[dvipdfm]{graphicx}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{here}
+\usepackage{helvet}
+\usepackage{helvet}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{amsmath,amssymb}
+\usepackage{color}
+\setcounter{MaxMatrixCols}{20}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{fancybox}
+\usepackage{braket}
+\usepackage[version=3]{mhchem}
+\usepackage{framed}
+\usepackage{tcolorbox}
+\usepackage{pdfpages}
+\usepackage{titlesec}
+\usepackage{picture}
+\usepackage{tikz}
+\hypersetup{
+setpagesize=false,
+ bookmarksnumbered=true,%
+ bookmarksopen=true,%
+ colorlinks=true,%
+ linkcolor=blue,
+ citecolor=green,
+}
+\makeatletter
+\newcommand{\bibchapfont}[1]{\hspace{-5mm}{\bf #1}} 
+\newcommand{\bibtit}[1]{{\it #1}}
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+\makeatother
+
+%CAPTION
+\newcommand{\captionplus}[2]{\caption[#1]{#1#2}} 
+
+%DEFINITIONS
+\newcommand{\shiki}[1]{式(\ref{#1})}
+\newcommand{\zu}[1]{図\ref{#1}}
+\newcommand{\hyou}[1]{表\ref{#1}}
+\newcommand{\shou}[1]{第\ref{#1}章}
+\newcommand{\setsu}[1]{\ref{#1}節}
+\newcommand{\hoi}[1]{補遺\ref{#1}}
+\newcommand{\bibchap}[1]{\bibchapfont{#1}\vspace{4mm}}	
+\newcommand{\unit}[1]{\ {\rm #1}}
+\newcommand{\disp}[1]{\ \displaystyle{#1}}
+\newcommand{\rot}{{\rm rot}}
+\newcommand{\PIS}{\left( \alpha + 1/2 \right)}
+\newcommand{\rtHz}{\sqrt{Hz}}
+\newcommand{\lab}{{\rm lab}}
+\newcommand{\T}{{\rm T}}
+\newcommand{\To}{T_{\oplus}}
+\newcommand{\etal}{{\it et al.}}
+\newcommand{\Omegao}{\Omega_{\oplus}}
+\newcommand{\omegao}{\omega_{\oplus}}
+
+\def\d{{\rm d}}
+\def\Vec#1{\mbox{\boldmath $#1$}}
+\newcommand{\bi}[1]{\boldsymbol{#1}}
+\newcommand{\rowvector}[2]{\left(%
+\begin{array}{c}
+ #1 \\
+ #2 \\
+\end{array} \right)}
+\newcommand{\squarematrix}[4]{\left(%
+\begin{array}{cc}
+ #1 & #2 \\
+ #3 & #4 \\
+\end{array} \right)}
+
+
+\tcbuselibrary{breakable}
+\definecolor{shadecolor}{gray}{0.80}
+
+% section
+\titleformat{\section}[block]{}{}{0pt}
+{
+  \definecolor{}{gray}{0.30}
+  \begin{picture}(0,0)
+    \put(-10,-5){
+      \begin{tikzpicture}
+        \fill[magenta] (0pt,0pt) rectangle (7pt,27pt);
+      \end{tikzpicture}
+    }
+    \put(-10,-5){
+      \color{magenta}
+      \line(1,0){\hsize}
+    }
+  \end{picture}
+  \hspace{0pt}
+  \sf \Huge \thesection
+  \hspace{4pt}
+}
+% subsection
+\titleformat{\subsection}[block]{}{}{0pt}
+{
+  \definecolor{blue}{gray}{0.30}
+  \begin{picture}(0,0)
+    \put(-10,-5){
+      \begin{tikzpicture}
+        \fill[cyan] (0pt,0pt) rectangle (5pt,19pt);
+      \end{tikzpicture}
+    }
+    \put(-10,-5){
+      \color{cyan}
+      \line(1,0){0.8\hsize}
+    }
+  \end{picture}
+  \hspace{0pt}
+  \sf \Large \thesubsection
+  \hspace{3pt}
+}
+% subsubsection
+\titleformat{\subsubsection}[block]{}{}{0pt}
+{
+  \definecolor{}{gray}{0.30}
+  \begin{picture}(0,0)
+    \put(-10,-5){
+      \begin{tikzpicture}
+        \fill[teal] (0pt,0pt) rectangle (4pt,15pt);
+      \end{tikzpicture}
+    }
+    \put(-10,-5){
+      \color{teal}
+      \line(1,0){0.6\hsize}
+    }
+  \end{picture}
+  \hspace{0pt}
+  \sf \large \thesubsubsection
+  \hspace{2pt}
+}
+
+%章の設定
+\newcommand{\chapnumfont}[1]{\fontsize{20mm}{0pt}\selectfont\sf\textbf{#1}}  % 章見出しの数字/アルファベットのフォント
+\newcommand{\chapfont}[1]{\fontsize{10mm}{0pt}\selectfont{\bfseries\textbf{#1}}}   % 第と章のフォント
+\newcommand{\chapfontw}[1]{\fontsize{13mm}{0pt}\selectfont{\bfseries\textbf{#1}}}  % chapter見出しのフォント
+\newcommand{\chaptername}{第}  
+\newcommand{\chapternamew}{章}  
+\renewcommand{\prechaptername}{}  
+\renewcommand{\postchaptername}{}  
+\renewcommand{\appendixname}{}  
+\renewcommand{\contentsname}{目次}  
+\renewcommand{\bibname}{参考文献}  
+
+\makeatletter
+
+%chapter見出し
+\def\@makechapterhead#1{%
+  \vbox to 7.5cm{\parindent\z@
+    \raggedright
+    \reset@font
+    \huge\bfseries
+    \leavevmode
+    \ifnum \c@secnumdepth >\m@ne
+    \hskip10mm
+    \vskip13.5mm
+    \hrule \@height 0.8mm
+    \vskip.5mm
+    \hrule \@height 0.3mm
+    \vskip4mm
+    {\chapfont{\chaptername}}
+    {\chapnumfont{\thechapter}}
+    {\chapfont{\chapternamew}}
+    \vskip7mm
+    \vtop{\chapfontw{#1}}%
+    \vskip3mm
+    \hrule \@height 0.3mm
+    \vskip.5mm
+    \hrule \@height 0.8mm
+    \vskip20mm
+    \vfill
+    \else
+     #1\relax
+    \fi}
+  \nobreak
+}
+
+
+\def\@makeschapterhead#1{%
+  \vbox to 1.5cm{\parindent\z@
+  \raggedright
+  \vskip15.5mm
+  \hrule height.5mm depth\z@
+  \vskip3mm
+    {\chapfontw{#1}}
+    \par\prevdepth-1000pt
+    \vskip3mm
+    \hrule height.5mm depth\z@
+  }%
+  \vskip40mm
+}%
+
+
+\makeatother
+
+
+%タイトルページ
+\title{{\bf \Huge 修士論文}\\ \vspace{1zh}{\bf \Huge KAGRAにおける\\低温懸架装置の特性評価と制御\\ \vspace{1zh}{\bf \Large (Characterization and Control of Cryogenic Suspension in KAGRA)}}\\ \vspace{15zh}}
+\author{\LARGE 東京大学大学院 理学系研究科\\\vspace{1zh}\LARGE 物理学専攻 三代木研究室\\\vspace{1zh}\Large 35-216065\\\vspace{1zh} \LARGE 玉木諒秀}
+\date{2023年1月6日 提出} %\\ 2023年1月27日 最終版提出}   
+
+
+%本文
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\setcounter{tocdepth}{3}
+
+\mbox{}\newpage
+\input{0.1_abst_J.tex}
+\input{0.1_abst_E.tex}
+
+\tableofcontents
+
+\listoffigures
+\addcontentsline{toc}{chapter}{図目次}
+
+\listoftables
+\addcontentsline{toc}{chapter}{表目次}
+
+
+\clearpage
+\chapter{序論}
+\label{第1章}
+\pagenumbering{arabic}
+\noindent
+\fontsize{11pt}{16pt}\selectfont
+\input{1_begin.tex}
+
+\newpage
+　
+\newpage
+\chapter[重力波とレーザー干渉計型重力波検出器]{重力波と\\レーザー干渉計型重力波検出器}
+\label{第2章}
+\fontsize{11pt}{16pt}\selectfont
+\input{2_gw.tex}
+
+\newpage
+　
+\newpage
+\chapter{懸架系による防振}
+\label{第3章}
+\fontsize{11pt}{16pt}\selectfont
+\input{3_vis.tex}
+
+\chapter{KAGRA Type-A Suspension}
+\label{第4章}
+\fontsize{11pt}{16pt}\selectfont
+\input{4_typea.tex}
+
+\chapter{低温懸架装置の特性評価}
+\label{第5章}
+\fontsize{11pt}{16pt}\selectfont
+\input{5_characterization.tex}
+
+\newpage
+　
+\newpage
+\chapter{ダンピング制御}
+\label{第6章}
+\fontsize{11pt}{16pt}\selectfont
+\input{6_damping.tex}
+
+\chapter{制御雑音の低減}
+\label{第7章}
+\fontsize{11pt}{16pt}\selectfont
+\input{7_lownoise.tex}
+
+\chapter{結論}
+\label{第8章}
+\fontsize{11pt}{16pt}\selectfont
+\input{8_closing.tex}
+
+\appendix
+\def\thechapter{\Alph{chapter}}
+\def\chaptername{補遺}
+\def\chapternamew{}
+\renewcommand{\appendixname}{補遺}
+\chapter{反バネ効果による低周波防振}
+\label{補遺A}
+\fontsize{11pt}{16pt}\selectfont
+\input{A_antispring.tex}
+
+\newpage
+　
+\newpage
+\chapter{Optical Lever}
+\label{補遺B}
+\fontsize{11pt}{16pt}\selectfont
+\input{B_oplev.tex}
+
+\chapter{反射型フォトセンサ}
+\label{補遺C}
+\fontsize{11pt}{16pt}\selectfont
+\input{C_photosensor.tex}
+
+\chapter{伝達関数一覧}
+\label{補遺D}
+\fontsize{11pt}{16pt}\selectfont
+\input{D_tfimg.tex}
+
+\newpage
+　
+\newpage
+\begin{thebibliography}{99}
+\fontsize{11pt}{16pt}\selectfont
+\makeatletter
+\@newlistfalse
+\makeatother
+\input{9.1_biblio.tex}
+\end{thebibliography}
+
+\chapter*{謝辞}
+\addcontentsline{toc}{chapter}{謝辞}
+\fontsize{11pt}{16pt}\selectfont
+\input{9.2_acknowledge.tex}
+
+\end{document}

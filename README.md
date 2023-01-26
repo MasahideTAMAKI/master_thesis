@@ -26,6 +26,7 @@ $ git add file_name
 #### For all add
 ```sh
 $ git add .
+```
 #### For file deletion, go here
 ```sh
 $ git rm file_name
